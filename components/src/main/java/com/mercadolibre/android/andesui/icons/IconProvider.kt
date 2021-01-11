@@ -14,5 +14,10 @@ class IconProvider(private val context: Context) {
      *
      * @param name the name of the icon.
      */
-    fun loadIcon(name: String): Drawable? = iconProviderStrategy.loadIcon(name)
+    fun loadIcon(name: Any): Drawable? {
+        return when (name) {
+            is Drawable -> name
+            else -> (name as? String)?.let { iconProviderStrategy.loadIcon(name) }
+        }
+    }
 }

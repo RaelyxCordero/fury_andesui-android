@@ -1,4 +1,6 @@
-package com.mercadolibre.android.andesui.button.hierarchy
+package com.mercadolibre.android.andesui.button.hierarchy.andesbuttonicon
+
+import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonIconOrientation
 
 /**
  * Holds data about the icon a button can carry: Icon and Orientation.
@@ -6,7 +8,7 @@ package com.mercadolibre.android.andesui.button.hierarchy
  * @property icon the icon itself
  * @property orientation an [AndesButtonIconOrientation] that can be [AndesButtonIconOrientation.LEFT] or [AndesButtonIconOrientation.RIGHT]
  */
-class AndesButtonIcon(val icon: String?, private val orientation: AndesButtonIconOrientation) {
+class AndesButtonIcon(override val icon: String?, override val orientation: AndesButtonIconOrientation): AndesButtonResource<String> {
     internal val leftIcon get() = getLeftIcon()
     internal val rightIcon get() = getRightIcon()
 
@@ -15,7 +17,7 @@ class AndesButtonIcon(val icon: String?, private val orientation: AndesButtonIco
      *
      * @return the left icon if it exists, null otherwise.
      */
-    private fun getLeftIcon(): String? {
+    override fun getLeftIcon(): String? {
         return when {
             icon != null && orientation == AndesButtonIconOrientation.LEFT -> {
                 icon
@@ -29,7 +31,7 @@ class AndesButtonIcon(val icon: String?, private val orientation: AndesButtonIco
      *
      * @return the right icon if it exists, null otherwise.
      */
-    private fun getRightIcon(): String? {
+    override fun getRightIcon(): String? {
         return when {
             icon != null && orientation == AndesButtonIconOrientation.RIGHT -> {
                 icon

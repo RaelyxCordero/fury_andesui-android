@@ -1,6 +1,8 @@
 package com.mercadolibre.android.andesui.button.factory
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchy
@@ -9,15 +11,23 @@ import com.mercadolibre.android.andesui.button.size.AndesButtonSize
 /**
  * The data class that contains the public components of the button.
  */
-internal data class AndesButtonAttrs(
-    val andesButtonHierarchy: AndesButtonHierarchy,
-    val andesButtonSize: AndesButtonSize,
-    val andesButtonLeftIconPath: String?,
-    val andesButtonRightIconPath: String?,
-    val andesButtonText: String?,
-    val andesButtonEnabled: Boolean = true,
-    val andesButtonIsLoading: Boolean = false
+internal data class AndesButtonAttrs <T>(
+        val andesButtonHierarchy: AndesButtonHierarchy,
+        val andesButtonSize: AndesButtonSize,
+        val andesButtonLeftIcon: T?,
+        val andesButtonRightIcon: T?,
+        val andesButtonText: String?,
+        val andesButtonEnabled: Boolean = true,
+        val andesButtonIsLoading: Boolean = false
 )
+
+@SuppressLint("Recycle")
+fun AttributeSet.hasIconDrawable(context: Context): Boolean {
+    val typedArray = context.obtainStyledAttributes(this, R.styleable.AndesButton)
+
+    return typedArray.getDrawable(R.styleable.AndesButton_andesButtonLeftIconDrawable) != null
+            || typedArray.getDrawable(R.styleable.AndesButton_andesButtonRightIconDrawable) != null
+}
 
 /**
  * This object parse the attribute set and return an instance of AndesButtonAttrs to be used by AndesButton
@@ -44,7 +54,7 @@ internal object AndesButtonAttrsParser {
      * @return [AndesButtonAttrs] that contains all the data that [AndesButtonConfigurationFactory]
      * needs to create its configuration.
      */
-    fun parse(context: Context, attr: AttributeSet?): AndesButtonAttrs {
+    fun parse(context: Context, attr: AttributeSet?): AndesButtonAttrs<Any> {
         val typedArray = context.obtainStyledAttributes(attr, R.styleable.AndesButton)
 
         val hierarchy = when (typedArray.getString(R.styleable.AndesButton_andesButtonHierarchy)) {
@@ -61,14 +71,31 @@ internal object AndesButtonAttrsParser {
             else -> AndesButtonSize.LARGE
         }
 
-        return AndesButtonAttrs(
-                andesButtonHierarchy = hierarchy,
-                andesButtonSize = size,
-                andesButtonLeftIconPath = typedArray.getString(R.styleable.AndesButton_andesButtonLeftIconPath),
-                andesButtonRightIconPath = typedArray.getString(R.styleable.AndesButton_andesButtonRightIconPath),
-                andesButtonEnabled = typedArray.getBoolean(R.styleable.AndesButton_andesButtonEnabled, true),
-                andesButtonText = typedArray.getString(R.styleable.AndesButton_andesButtonText),
-                andesButtonIsLoading = typedArray.getBoolean(R.styleable.AndesButton_andesButtonIsLoading, false)
-        ).also { typedArray.recycle() }
+        val hasDrawable = attr?.hasIconDrawable(context) ?: false
+
+        val andesButtonAttrs: AndesButtonAttrs<Any> = if (hasDrawable){
+            AndesButtonAttrs(
+                    andesButtonHierarchy = hierarchy,
+                    andesButtonSize = size,
+                    andesButtonLeftIcon = typedArray.getDrawable(R.styleable.AndesButton_andesButtonLeftIconDrawable),
+                    andesButtonRightIcon = typedArray.getDrawable(R.styleable.AndesButton_andesButtonRightIconDrawable),
+                    andesButtonEnabled = typedArray.getBoolean(R.styleable.AndesButton_andesButtonEnabled, true),
+                    andesButtonText = typedArray.getString(R.styleable.AndesButton_andesButtonText),
+                    andesButtonIsLoading = typedArray.getBoolean(R.styleable.AndesButton_andesButtonIsLoading, false)
+            )
+        } else {
+            AndesButtonAttrs(
+                    andesButtonHierarchy = hierarchy,
+                    andesButtonSize = size,
+                    andesButtonLeftIcon = typedArray.getString(R.styleable.AndesButton_andesButtonLeftIconPath),
+                    andesButtonRightIcon = typedArray.getString(R.styleable.AndesButton_andesButtonRightIconPath),
+                    andesButtonEnabled = typedArray.getBoolean(R.styleable.AndesButton_andesButtonEnabled, true),
+                    andesButtonText = typedArray.getString(R.styleable.AndesButton_andesButtonText),
+                    andesButtonIsLoading = typedArray.getBoolean(R.styleable.AndesButton_andesButtonIsLoading, false)
+            )
+        }
+
+        typedArray.recycle()
+        return andesButtonAttrs
     }
 }

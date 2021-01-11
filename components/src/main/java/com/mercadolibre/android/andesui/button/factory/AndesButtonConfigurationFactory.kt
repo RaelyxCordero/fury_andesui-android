@@ -2,15 +2,13 @@ package com.mercadolibre.android.andesui.button.factory
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.content.res.TypedArray
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
-import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.button.factory.AndesButtonConfigurationFactory.create
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchy
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchyInterface
-import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonIcon
+import com.mercadolibre.android.andesui.button.hierarchy.andesbuttonicon.AndesButtonIcon
 import com.mercadolibre.android.andesui.button.size.AndesButtonSize
 import com.mercadolibre.android.andesui.button.size.AndesButtonSizeInterface
 
@@ -75,7 +73,7 @@ internal object AndesButtonConfigurationFactory {
      * @param andesButtonAttrs parsed attributes with AndesButton data from XML
      * @return [AndesButtonConfiguration] that contains all the data that [AndesButton] needs to draw itself properly.
      */
-    fun create(context: Context, andesButtonAttrs: AndesButtonAttrs): AndesButtonConfiguration {
+    fun create (context: Context, andesButtonAttrs: AndesButtonAttrs<Any>): AndesButtonConfiguration {
         val hierarchy = andesButtonAttrs.andesButtonHierarchy.hierarchy
         val size = andesButtonAttrs.andesButtonSize.size
 
@@ -84,13 +82,13 @@ internal object AndesButtonConfigurationFactory {
                 text = andesButtonAttrs.andesButtonText,
                 textColor = resolveTextColor(hierarchy, context),
                 textSize = resolveTextSize(size, context),
-                margin = resolveMargin(size, andesButtonAttrs.andesButtonLeftIconPath,
-                        andesButtonAttrs.andesButtonRightIconPath, context),
+                margin = resolveMargin(size, andesButtonAttrs.andesButtonLeftIcon,
+                        andesButtonAttrs.andesButtonRightIcon, context),
                 height = resolveHeight(size, context),
                 typeface = resolveTypeface(hierarchy, context),
                 iconConfig = resolveIconConfig(size, hierarchy,
-                        andesButtonAttrs.andesButtonLeftIconPath,
-                        andesButtonAttrs.andesButtonRightIconPath, context),
+                        andesButtonAttrs.andesButtonLeftIcon,
+                        andesButtonAttrs.andesButtonRightIcon, context),
                 enabled = andesButtonAttrs.andesButtonEnabled,
                 lateralPadding = resolveLateralPadding(size, context),
                 isLoading = andesButtonAttrs.andesButtonIsLoading
@@ -176,8 +174,8 @@ internal object AndesButtonConfigurationFactory {
      */
     private fun resolveMargin(
         size: AndesButtonSizeInterface,
-        leftIconPath: String?,
-        rightIconPath: String?,
+        leftIconPath: Any?,
+        rightIconPath: Any?,
         context: Context
     ) = AndesButtonMargin(size, leftIconPath, rightIconPath, context)
 
@@ -218,8 +216,8 @@ internal object AndesButtonConfigurationFactory {
     private fun resolveIconConfig(
         size: AndesButtonSizeInterface,
         hierarchy: AndesButtonHierarchyInterface,
-        leftIconPath: String?,
-        rightIconPath: String?,
+        leftIconPath: Any?,
+        rightIconPath: Any?,
         context: Context
     ) = size.iconConfig(hierarchy, leftIconPath, rightIconPath, context)
 

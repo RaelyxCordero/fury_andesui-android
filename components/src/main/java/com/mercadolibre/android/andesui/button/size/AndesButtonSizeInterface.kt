@@ -108,8 +108,8 @@ internal interface AndesButtonSizeInterface {
      */
     fun iconConfig(
         hierarchy: AndesButtonHierarchyInterface,
-        leftIcon: String?,
-        rightIcon: String?,
+        leftIcon: Any?,
+        rightIcon: Any?,
         context: Context
     ): IconConfig?
 
@@ -149,8 +149,8 @@ internal class AndesLargeButtonSize : AndesButtonSizeInterface {
 
     override fun iconConfig(
         hierarchy: AndesButtonHierarchyInterface,
-        leftIcon: String?,
-        rightIcon: String?,
+        leftIcon: Any?,
+        rightIcon: Any?,
         context: Context
     ): IconConfig? {
 
@@ -167,7 +167,7 @@ internal class AndesLargeButtonSize : AndesButtonSizeInterface {
         }
     }
 
-    private fun handleLeftIcon(context: Context, leftIcon: String, hierarchy: AndesButtonHierarchyInterface): IconConfig? {
+    private fun handleLeftIcon(context: Context, leftIcon: Any, hierarchy: AndesButtonHierarchyInterface): IconConfig? {
         return try {
             val leftBitmapDrawable = buildColoredAndesBitmapDrawable(
                 IconProvider(context).loadIcon(leftIcon) as BitmapDrawable,
@@ -182,7 +182,7 @@ internal class AndesLargeButtonSize : AndesButtonSizeInterface {
         }
     }
 
-    private fun handleRightIcon(context: Context, rightIcon: String, hierarchy: AndesButtonHierarchyInterface): IconConfig? {
+    private fun handleRightIcon(context: Context, rightIcon: Any, hierarchy: AndesButtonHierarchyInterface): IconConfig? {
         return try {
             val rightBitmapDrawable = buildColoredAndesBitmapDrawable(
                 IconProvider(context).loadIcon(rightIcon) as BitmapDrawable,
@@ -220,8 +220,8 @@ internal class AndesMediumButtonSize : AndesButtonSizeInterface {
             context.resources.getDimension(R.dimen.andes_button_border_radius_medium)
     override fun iconConfig(
         hierarchy: AndesButtonHierarchyInterface,
-        leftIcon: String?,
-        rightIcon: String?,
+        leftIcon: Any?,
+        rightIcon: Any?,
         context: Context
     ): Nothing? = null
 }
@@ -244,8 +244,8 @@ internal class AndesSmallButtonSize : AndesButtonSizeInterface {
             context.resources.getDimension(R.dimen.andes_button_border_radius_small)
     override fun iconConfig(
         hierarchy: AndesButtonHierarchyInterface,
-        leftIcon: String?,
-        rightIcon: String?,
+        leftIcon: Any?,
+        rightIcon: Any?,
         context: Context
     ): Nothing? = null
 }

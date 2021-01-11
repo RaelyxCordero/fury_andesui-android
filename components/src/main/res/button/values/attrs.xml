@@ -17,6 +17,10 @@
 
         <attr name="andesButtonRightIconPath" format="string" />
 
+        <attr name="andesButtonLeftIconDrawable" format="integer" />
+
+        <attr name="andesButtonRightIconDrawable" format="integer" />
+
         <attr name="andesButtonText" format="reference" />
 
         <attr name="andesButtonEnabled" format="boolean" />

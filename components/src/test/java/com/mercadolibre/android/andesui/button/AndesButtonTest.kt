@@ -10,7 +10,7 @@ import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.facebook.soloader.SoLoader
 import com.mercadolibre.android.andesui.BuildConfig
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchy
-import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonIcon
+import com.mercadolibre.android.andesui.button.hierarchy.andesbuttonicon.AndesButtonIcon
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonIconOrientation
 import com.mercadolibre.android.andesui.button.size.AndesButtonSize
 import org.assertj.core.api.Assertions.assertThat

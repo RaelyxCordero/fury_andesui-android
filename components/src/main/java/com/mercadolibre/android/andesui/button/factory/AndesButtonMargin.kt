@@ -17,8 +17,8 @@ import com.mercadolibre.android.andesui.button.size.AndesButtonSizeInterface
  */
 internal class AndesButtonMargin(
     private val size: AndesButtonSizeInterface,
-    private val leftIcon: String?,
-    private val rightIcon: String?,
+    private val leftIcon: Any?,
+    private val rightIcon: Any?,
     private val context: Context
 ) {
 
