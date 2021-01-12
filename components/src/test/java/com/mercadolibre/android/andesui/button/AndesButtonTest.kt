@@ -9,9 +9,11 @@ import com.facebook.imagepipeline.listener.RequestListener
 import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.facebook.soloader.SoLoader
 import com.mercadolibre.android.andesui.BuildConfig
+import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchy
 import com.mercadolibre.android.andesui.button.hierarchy.andesbuttonicon.AndesButtonIcon
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonIconOrientation
+import com.mercadolibre.android.andesui.button.hierarchy.andesbuttonicon.AndesButtonIconDrawable
 import com.mercadolibre.android.andesui.button.size.AndesButtonSize
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Assert.assertEquals
@@ -29,6 +31,7 @@ import org.robolectric.annotation.Config
 class AndesButtonTest {
     private var context = RuntimeEnvironment.application
     private lateinit var andesButton: AndesButton
+    private val ANDES_ICON_DRAWABLE = context.resources.getDrawable(R.drawable.andes_ui_arrow_down_32)
 
     companion object {
         @JvmStatic
@@ -112,6 +115,73 @@ class AndesButtonTest {
         assertEquals(andesButton.paddingLeft, 16)
         assertNull(andesButton.leftIconComponent.drawable)
         assertThat(andesButton.rightIconComponent.drawable).isEqualToComparingOnlyGivenFields(icon)
+        assertEquals(andesButton.isLoading, false)
+    }
+
+    @Test
+    fun `should build AndesButton with AndesButtonIcon with string id`(){
+        val icon = AndesButtonIcon(ANDES_ICON, AndesButtonIconOrientation.RIGHT)
+
+        andesButton = AndesButton(context, AndesButtonSize.LARGE, AndesButtonHierarchy.TRANSPARENT, icon)
+
+        val textParams = andesButton.textComponent.layoutParams as ConstraintLayout.LayoutParams
+        val rightIconParams = andesButton.rightIconComponent.layoutParams as ConstraintLayout.LayoutParams
+
+        assertEquals(andesButton.textComponent.textSize, 16F)
+        assertEquals(textParams.marginEnd, 12)
+        assertEquals(rightIconParams.marginEnd, 0)
+        assertEquals(textParams.goneStartMargin, 8)
+        assertEquals(andesButton.paddingRight, 16)
+        assertEquals(andesButton.paddingLeft, 16)
+        assertNull(andesButton.leftIconComponent.drawable)
+        assertThat(andesButton.rightIconComponent.drawable).isEqualToComparingOnlyGivenFields(icon)
+        assertEquals(andesButton.isLoading, false)
+
+        val icon2 = AndesButtonIcon(ANDES_ICON, AndesButtonIconOrientation.LEFT)
+        andesButton.setButtonIcon(icon2)
+        val leftIconParams = andesButton.leftIconComponent.layoutParams as ConstraintLayout.LayoutParams
+
+        assertEquals(andesButton.textComponent.textSize, 16F)
+        assertEquals(leftIconParams.marginStart, 0)
+        assertEquals(textParams.marginStart, 12)
+        assertEquals(textParams.goneEndMargin, 8)
+        assertEquals(andesButton.paddingRight, 16)
+        assertEquals(andesButton.paddingLeft, 16)
+        assertThat(andesButton.leftIconComponent.drawable).isEqualToComparingOnlyGivenFields(icon)
+        assertNull(andesButton.rightIconComponent.drawable)
+        assertEquals(andesButton.isLoading, false)
+
+    }
+    @Test
+    fun `should build AndesButton with AndesButtonIconDrawable with drawable`(){
+        val icon = AndesButtonIconDrawable(ANDES_ICON_DRAWABLE, AndesButtonIconOrientation.RIGHT)
+        andesButton = AndesButton(context, AndesButtonSize.LARGE, AndesButtonHierarchy.TRANSPARENT, icon)
+
+        val textParams = andesButton.textComponent.layoutParams as ConstraintLayout.LayoutParams
+        val rightIconParams = andesButton.rightIconComponent.layoutParams as ConstraintLayout.LayoutParams
+
+        assertEquals(andesButton.textComponent.textSize, 16F)
+        assertEquals(textParams.marginEnd, 12)
+        assertEquals(rightIconParams.marginEnd, 0)
+        assertEquals(textParams.goneStartMargin, 8)
+        assertEquals(andesButton.paddingRight, 16)
+        assertEquals(andesButton.paddingLeft, 16)
+        assertNull(andesButton.leftIconComponent.drawable)
+        assertThat(andesButton.rightIconComponent.drawable).isEqualToComparingOnlyGivenFields(icon)
+        assertEquals(andesButton.isLoading, false)
+
+        val icon2 = AndesButtonIconDrawable(ANDES_ICON_DRAWABLE, AndesButtonIconOrientation.LEFT)
+        andesButton.setButtonIcon(icon2)
+        val leftIconParams = andesButton.leftIconComponent.layoutParams as ConstraintLayout.LayoutParams
+
+        assertEquals(andesButton.textComponent.textSize, 16F)
+        assertEquals(leftIconParams.marginStart, 0)
+        assertEquals(textParams.marginStart, 12)
+        assertEquals(textParams.goneEndMargin, 8)
+        assertEquals(andesButton.paddingRight, 16)
+        assertEquals(andesButton.paddingLeft, 16)
+        assertThat(andesButton.leftIconComponent.drawable).isEqualToComparingOnlyGivenFields(icon)
+        assertNull(andesButton.rightIconComponent.drawable)
         assertEquals(andesButton.isLoading, false)
     }
 }
