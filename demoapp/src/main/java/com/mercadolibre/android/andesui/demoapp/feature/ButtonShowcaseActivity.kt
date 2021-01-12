@@ -11,8 +11,9 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchy
-import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonIcon
+import com.mercadolibre.android.andesui.button.hierarchy.andesbuttonicon.AndesButtonIcon
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonIconOrientation
+import com.mercadolibre.android.andesui.button.hierarchy.andesbuttonicon.AndesButtonIconDrawable
 import com.mercadolibre.android.andesui.button.size.AndesButtonSize
 import com.mercadolibre.android.andesui.demoapp.feature.specs.AndesSpecs
 import com.mercadolibre.android.andesui.demoapp.feature.utils.PageIndicator
@@ -63,11 +64,37 @@ class ButtonShowcaseActivity : AppCompatActivity() {
             AndesButtonHierarchy.QUIET,
             AndesButtonIcon("andesui_icon_dynamic", AndesButtonIconOrientation.LEFT)
         )
+
         andesButtonLarge.text = getString(R.string.loud_large_button_programmatic)
         andesButtonLarge.hierarchy = AndesButtonHierarchy.LOUD
         andesButtonLarge.setOnClickListener {
             andesButtonLarge.text = getString(R.string.loud_large_button_text_updated)
             andesButtonLarge.size = AndesButtonSize.SMALL
+        }
+
+        val drawable = resources.getDrawable(R.drawable.andes_ui_arrow_down_32)
+        val andesButtonLargeIconDrawable = AndesButton(
+                this,
+                AndesButtonSize.LARGE,
+                AndesButtonHierarchy.LOUD,
+                AndesButtonIconDrawable(drawable, AndesButtonIconOrientation.RIGHT)
+        ).apply {
+            var status = true
+            text = getString(R.string.loud_large_button_programmatic_with_icon)
+            setButtonIcon(AndesButtonIconDrawable(resources.getDrawable(R.drawable.andes_ui_arrow_down_32), AndesButtonIconOrientation.RIGHT))
+
+            setOnClickListener {
+                if (status){
+                    this.text = getString(R.string.loud_large_button_icon_text_updated)
+                    this.setButtonIcon(AndesButtonIconDrawable(resources.getDrawable(R.drawable.andes_ui_arrow_up_32), AndesButtonIconOrientation.RIGHT))
+                    status = false
+                } else {
+                    text = getString(R.string.loud_large_button_icon_text_updated)
+                    setButtonIcon(AndesButtonIconDrawable(resources.getDrawable(R.drawable.andes_ui_arrow_down_32), AndesButtonIconOrientation.RIGHT))
+                    status = true
+                }
+
+            }
         }
 
         val params = LinearLayout.LayoutParams(
@@ -77,11 +104,13 @@ class ButtonShowcaseActivity : AppCompatActivity() {
         params.setMargins(0, 0, 0, resources.getDimension(R.dimen.button_margin_vertical).toInt())
 
         andesButtonLarge.layoutParams = params
+        andesButtonLargeIconDrawable.layoutParams = params
         andesButtonMedium.layoutParams = params
         andesButtonSmall.layoutParams = params
 
         val linearLoud = container.findViewById<LinearLayout>(R.id.andes_loud_container)
         linearLoud.addView(andesButtonLarge, linearLoud.childCount - 1)
+        linearLoud.addView(andesButtonLargeIconDrawable, linearLoud.childCount - 1)
         linearLoud.addView(andesButtonMedium, linearLoud.childCount - 1)
         linearLoud.addView(andesButtonSmall, linearLoud.childCount - 1)
 
@@ -117,18 +146,45 @@ class ButtonShowcaseActivity : AppCompatActivity() {
             andesButtonLarge.text = getString(R.string.quiet_large_button_hierarchy_updated)
         }
 
+        val drawable = resources.getDrawable(R.drawable.andes_ui_arrow_down_32)
+        val andesButtonLargeIconDrawable = AndesButton(
+                this,
+                AndesButtonSize.LARGE,
+                AndesButtonHierarchy.QUIET,
+                AndesButtonIconDrawable(drawable, AndesButtonIconOrientation.RIGHT)
+        ).apply {
+            var status = true
+            text = getString(R.string.loud_large_button_programmatic_with_icon)
+            setButtonIcon(AndesButtonIconDrawable(resources.getDrawable(R.drawable.andes_ui_arrow_down_32), AndesButtonIconOrientation.RIGHT))
+
+            setOnClickListener {
+                if (status){
+                    text = getString(R.string.loud_large_button_icon_text_updated)
+                    setButtonIcon(AndesButtonIconDrawable(resources.getDrawable(R.drawable.andes_ui_arrow_up_32), AndesButtonIconOrientation.RIGHT))
+                    status = false
+                } else {
+                    text = getString(R.string.loud_large_button_icon_text_updated)
+                    setButtonIcon(AndesButtonIconDrawable(resources.getDrawable(R.drawable.andes_ui_arrow_down_32), AndesButtonIconOrientation.RIGHT))
+                    status = true
+                }
+
+            }
+        }
+
         val params = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
         params.setMargins(0, 0, 0, resources.getDimension(R.dimen.button_margin_vertical).toInt())
 
+        andesButtonLargeIconDrawable.layoutParams = params
         andesButtonLarge.layoutParams = params
         andesButtonMedium.layoutParams = params
         andesButtonSmall.layoutParams = params
 
         val linearQuiet = container.findViewById<LinearLayout>(R.id.andes_quiet_container)
         linearQuiet.addView(andesButtonLarge, linearQuiet.childCount - 1)
+        linearQuiet.addView(andesButtonLargeIconDrawable, linearQuiet.childCount - 1)
         linearQuiet.addView(andesButtonMedium, linearQuiet.childCount - 1)
         linearQuiet.addView(andesButtonSmall, linearQuiet.childCount - 1)
 
@@ -167,12 +223,38 @@ class ButtonShowcaseActivity : AppCompatActivity() {
         )
         andesButtonLargeInt.text = getString(R.string.transparent_large_button_programmatic_int)
 
+        val drawable = resources.getDrawable(R.drawable.andes_ui_arrow_down_32)
+        val andesButtonLargeIconDrawable = AndesButton(
+                this,
+                AndesButtonSize.LARGE,
+                AndesButtonHierarchy.TRANSPARENT,
+                AndesButtonIconDrawable(drawable, AndesButtonIconOrientation.RIGHT)
+        ).apply {
+            var status = true
+            text = getString(R.string.loud_large_button_programmatic_with_icon)
+            setButtonIcon(AndesButtonIconDrawable(resources.getDrawable(R.drawable.andes_ui_arrow_down_32), AndesButtonIconOrientation.RIGHT))
+
+            setOnClickListener {
+                if (status){
+                    text = getString(R.string.loud_large_button_icon_text_updated)
+                    setButtonIcon(AndesButtonIconDrawable(resources.getDrawable(R.drawable.andes_ui_arrow_up_32), AndesButtonIconOrientation.RIGHT))
+                    status = false
+                } else {
+                    text = getString(R.string.loud_large_button_icon_text_updated)
+                    setButtonIcon(AndesButtonIconDrawable(resources.getDrawable(R.drawable.andes_ui_arrow_down_32), AndesButtonIconOrientation.RIGHT))
+                    status = true
+                }
+
+            }
+        }
+
         val params = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
         params.setMargins(0, 0, 0, resources.getDimension(R.dimen.button_margin_vertical).toInt())
 
+        andesButtonLargeIconDrawable.layoutParams = params
         andesButtonLarge.layoutParams = params
         andesButtonMedium.layoutParams = params
         andesButtonSmall.layoutParams = params
@@ -180,6 +262,7 @@ class ButtonShowcaseActivity : AppCompatActivity() {
         val linearTransparent = container.findViewById<LinearLayout>(R.id.andes_transparent_container)
         linearTransparent.addView(andesButtonLargeInt, linearTransparent.childCount - 1)
         linearTransparent.addView(andesButtonLarge, linearTransparent.childCount - 1)
+        linearTransparent.addView(andesButtonLargeIconDrawable, linearTransparent.childCount - 1)
         linearTransparent.addView(andesButtonMedium, linearTransparent.childCount - 1)
         linearTransparent.addView(andesButtonSmall, linearTransparent.childCount - 1)
 
