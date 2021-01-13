@@ -28,13 +28,4 @@
         android:background="@color/andes_white"
         android:gravity="center" />
 
-    <com.mercadolibre.android.andesui.button.AndesButton
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:andesButtonText="@string/andes_button_text"
-        app:andesButtonHierarchy="loud"
-        app:andesButtonSize="large"
-        app:andesButtonLeftIconDrawable="@drawable/andesui_icon_dynamic"
-        />
-
 </LinearLayout>
