@@ -1,3 +1,7 @@
+# v3.5.0
+## 🚀 Features
+- AndesButton with drawable icon support | Author: [@RaelyxCordero](https://github.com/RaelyxCordero)
+
 # v3.4.0
 ## 🚀 Features
 - Dropdown | Author: [@snti](https://github.com/snti)

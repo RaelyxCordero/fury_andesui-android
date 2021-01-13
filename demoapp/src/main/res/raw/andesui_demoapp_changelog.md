@@ -1,13 +1,17 @@
+# v3.5.0
+## 🚀 Features
+- AndesButton with drawable icon support | Author: [@RaelyxCordero](https://github.com/RaelyxCordero)
+
 # v3.4.0
 ## 🚀 Features
 - Dropdown | Author: [@snti](https://github.com/snti)
 
 # v3.3.1
-## 🚀 Features
-- Added new icons for "Online Payments" and "QR"
-
 ## 🛠 Fixes
 - Fix bodyPadding on CardComponent when padding is none from XML | Author: [@ariel-ramirez](https://github.com/ariel-ramirez)
+
+## 🚀 Features
+- Added new icons for "Online Payments" and "QR"
 
 # v3.3.0
 ## 🛠 Fixes
@@ -19,7 +23,7 @@
 - Add bodyPadding property to AndesCard | Author: [@ariel-ramirez](https://github.com/ariel-ramirez)
 
 # v3.2.0
-## 🛠 Fixes
+## 🚀 Fixes
 - Fix the size of the right and left componente of text
 ## 🚀 Features
 - Migración Constraint layout v2
