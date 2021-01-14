@@ -1,6 +1,7 @@
 # v3.5.0
 ## 🚀 Features
 - AndesButton with drawable icon support | Author: [@RaelyxCordero](https://github.com/RaelyxCordero)
+- AndesMessage With Thumbnnail | Authors [a0zamora](https://github.com/a0zamora)
 
 # v3.4.0
 ## 🚀 Features
@@ -11,19 +12,18 @@
 - Fix bodyPadding on CardComponent when padding is none from XML | Author: [@ariel-ramirez](https://github.com/ariel-ramirez)
 
 ## 🚀 Features
-- Added new icons for "Online Payments" and "QR"
 
 # v3.3.0
 ## 🛠 Fixes
 ### AndesDatePicker | Author: [@Adrian De Seta](https://github.com/adriandeseta1985)
 - Fix the size of the calendar api level < 21
-- Fix color in andes
+- Fix color
 
 ## 🚀 Features
 - Add bodyPadding property to AndesCard | Author: [@ariel-ramirez](https://github.com/ariel-ramirez)
 
 # v3.2.0
-## 🚀 Fixes
+## 🛠 Fixes
 - Fix the size of the right and left componente of text
 ## 🚀 Features
 - Migración Constraint layout v2

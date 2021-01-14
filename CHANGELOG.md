@@ -1,6 +1,8 @@
 # v3.5.0
 ## 🚀 Features
 - AndesButton with drawable icon support | Author: [@RaelyxCordero](https://github.com/RaelyxCordero)
+- AndesMessage With Thumbnnail | Authors [a0zamora](https://github.com/a0zamora)
+
 
 ### ⚙️ Other
 - Disable bot for issues | Authors [joalonspint](https://github.com/joalonsopint)
@@ -125,8 +127,8 @@
 
 # v2.8.0
 ## 🚀 Features
-- AndesCard: Hierarchy primary/secondary | Author: [@ArqMobile](https://github.com/mercadolibre/fury_andesui-android)
-- AndesCard: Actions support (link) | Author: [@ArqMobile](https://github.com/mercadolibre/fury_andesui-android)
+- AndesCard: Hierarchy primary/secondary | Author: [@ArqMobile](https://github.com/mercadolibre/fury_andesui-android)
+- AndesCard: Actions support (link) | Author: [@ArqMobile](https://github.com/mercadolibre/fury_andesui-android)
 
 # v2.7.1
 ## 🚀 Features
